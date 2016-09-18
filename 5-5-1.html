@@ -4,6 +4,15 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script>
+			$(function(){
+				$('form :input.required').each(function(){
+					var $required = $("<strong class='high'>*</strong>");//创建元素
+					$(this).parent().append($required);//将它追加到文档中
+				});
+			})
+		</script>
 	</head>
 	<body>
 		<form action="" method="post">
