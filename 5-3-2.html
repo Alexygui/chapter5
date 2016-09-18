@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script>
+			$(function(){
+				//全选/全不选
+				$('#checkAll').click(function(){
+					if(this.checked) {
+						$('input[type=checkbox][id=items]').attr('checked',true)
+					}else{
+						$('input[type=checkbox][id=items]').attr('checked',false)
+					}
+				})
+				//单个选项
+				$('input[type=checkbox][id=items]').click(function(){
+					var flag = true;
+					$('input[type=checkbox][id=items]').each(function(){
+						if(!this.checked){
+							flag = false;
+						}
+					})
+					if(flag) {
+						$('#checkAll').attr('checked',true);
+					}else{
+						$('#checkAll').attr("checked",false);
+					}
+				})
+				//提交
+				$('#send').click(function(){
+					var str="你选择的是\r\n";
+					$('input[type=checkbox][id=items]:checked').each(function(){
+						str += $(this).val()+"\r\n";
+					})
+					alert(str);
+				})
+				
+			})
+		</script>
+	</head>
+	<body>
+		<form action="" method="post">
+			你爱好的运动是？<input type="checkbox" id="checkAll"/>全选/全不选<br />
+			<input type="checkbox" id='items' value="足球"/>足球
+			<input type="checkbox" id='items' value="篮球"/>蓝球
+			<input type="checkbox" id='items' value="羽毛球"/>羽毛球
+			<input type="checkbox" id='items' value="乒乓球"/>乒乓球
+			
+			<input type="button" id='send' value="提交"/>
+		</form>
+	</body>
+</html>
