@@ -12,9 +12,12 @@
 					var $required = $("<strong class='high'>*</strong>");//创建元素
 					$(this).parent().append($required);//将它追加到文档中
 				});
+				
 				//文本框失去焦点以后
 				$('form :input').blur(function(){
 					var $parent = $(this).parent();
+					//除去之前的验证，否则会有很多验证丑陋的出现
+					$parent.find('.formtips').remove();
 					//验证username
 					if($(this).is('#username')) {
 						if(this.value == "" || this.value.length < 6){
@@ -36,10 +39,26 @@
 						}
 					}
 					
-					
-					
+				}).keyup(function(){
+					$(this).triggerHandler('blur');
+				}).focus(function(){
+					$(this).triggerHandler('blur');
 				});
 				
+				//最终提交验证
+				$('#send').click(function(){
+					$('form :input.required').blur();
+					var numError = $('form .onError').length;
+					if(numError){
+						return false;
+					}
+					alert("注册成功，密码已经发到您的邮箱，请查收");
+				});
+				
+				//重置
+				$('#res').click(function(){
+					$('form.formtips').remove()
+				})
 				
 			})
 		</script>
